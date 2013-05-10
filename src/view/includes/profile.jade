@@ -1,0 +1,28 @@
+div
+  a(href="{{ baseUrl }}?mode=medium&illust_id={{ model.illustId }}") {{ model.title }}
+  span &ensp;/&ensp;
+  a(href="{{ baseUrl }}?id={{ model.auteurId }}") {{ model.auteur }}
+div(ng-show="config.infoEnabled") 閲覧数:{{ model.rtv }} 評価回数:{{ model.rtc }} 総合点:{{ model.rtt }}
+div(
+  ng-show="config.infoEnabled",
+  ng-bind-html-unsafe="model.meta")
+div(ng-show="config.rateEnabled")
+  div.PV-rate(ng-Class="{complete: model.score}")
+    i = 1
+    l = 10
+    - for (; i<=10; i++)
+      button(
+        tabindex="-1",
+        ng-class="{mark: model.score == #{i}}",
+        ng-click="model.rate(#{i})"
+        value=i) ★
+div(
+  ng-show="config.tagsEnabled",
+  ng-bind-html-unsafe="model.tags")
+div(
+  ng-show="config.descEnabled",
+  ng-bind-html-unsafe="model.desc")
+div(
+  ng-show="config.commentEnabled && model.comments",
+  ng-bind-html-unsafe="model.comments",
+  pv-show-comments="config.commentEnabled")

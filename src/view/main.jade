@@ -1,0 +1,19 @@
+div.PV(
+  ng-controller="MainCtrl",
+  ng-show="opened",
+  pv-key-event="")
+  div.PV-wrapper(
+    ng-click="handleRemove($event)")
+    div.PV-view(
+      hidden,
+      ng-class="{'align-left': config.alignLeft && config.panelEnabled}",
+      ng-style="{padding: config.margin + 'px'}")
+      img.PV-image(
+        ng-click="handleMove($event)",
+        pv-grab="",
+        pv-src="model.path")
+    p.PV-page(ng-show="model.length") {{ model.page + 1 }}&ensp;/&ensp;{{ model.length }}
+    p.PV-alert(
+      ng-show="model.message",
+      ng-click="handleMove($event)") {{model.message}}
+  include includes/panel

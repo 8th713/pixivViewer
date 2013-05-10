@@ -1,0 +1,42 @@
+div.PV-panel(
+  ng-show="model.imgUrl",
+  ng-style="getPanelStyle()")
+  div.PV-ctrl
+    button(
+      data-open='{{ config.panelEnabled }}',
+      ng-click="config.panelEnabled = !config.panelEnabled"
+      title='パネル切り替え')
+    button(
+      data-fit='{{ config.fitEnabled }}',
+      ng-click="config.fitEnabled = !config.fitEnabled"
+      title='画像サイズ切り替え')
+    include bookmark
+    include fav
+    button(
+      data-download="",
+      ng-click="download(model)",
+      title='表示中の画像をダウンロード')
+    include option
+  div.PV-tool(ng-show="config.panelEnabled")
+    button(
+      data-info='{{ config.infoEnabled }}',
+      ng-click="config.infoEnabled = !config.infoEnabled"
+      title='メタ情報切り替え')
+    button(
+      data-rate='{{ config.rateEnabled }}',
+      ng-click="config.rateEnabled = !config.rateEnabled"
+      title='レート表示切り替え')
+    button(
+      data-tags='{{ config.tagsEnabled }}',
+      ng-click="config.tagsEnabled = !config.tagsEnabled"
+      title='タグリスト切り替え')
+    button(
+      data-desc='{{ config.descEnabled }}',
+      ng-click="config.descEnabled = !config.descEnabled"
+      title='キャプション切り替え')
+    button(
+      data-comment='{{ config.commentEnabled }}',
+      ng-click="config.commentEnabled = !config.commentEnabled",
+      title='コメント切り替え')
+  div.PV-profile(ng-show="config.panelEnabled")
+    include profile

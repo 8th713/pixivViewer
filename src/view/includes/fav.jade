@@ -1,0 +1,33 @@
+div.PV-fav(
+  ng-show="showFav && !model.myPage")
+  div.label
+    span 公開設定
+    input(
+      type="checkbox",
+      ng-model="restrict",
+      ng-true-value="1",
+      ng-false-value="0")
+  div.btn-group
+    input.btn(
+      type="button",
+      ng-hide="model.favoriteState",
+      ng-click="addFav()",
+      value="追加")
+    input.btn(
+      type="button",
+      ng-show="model.favoriteState",
+      ng-click="modFav()",
+      value="変更")
+    input.btn(
+      type="button",
+      value="解除",
+      ng-show="model.favoriteState",
+      ng-click="removeFav()")
+  input.close(
+    type="button",
+    ng-click="showFav = false"
+    value="&times;")
+button(
+  ng-click="showFav = !myPage",
+  data-favorite='{{ model.favoriteState }}',
+  title='お気に入り')

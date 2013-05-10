@@ -1,0 +1,33 @@
+details(open)
+  summary Config
+  div.inner
+    p
+      input(
+        type="checkbox",
+        ng-model="config.hideScrollBar",
+        id="PV-hide-scrollbar")
+      label(for="PV-hide-scrollbar") Viewer 表示時スクロールバーを自動で隠す
+    p
+      input(
+        type="checkbox",
+        ng-model="config.alignLeft",
+        id="PV-align-left")
+      label(for="PV-align-left") 情報欄表示中は画像を左寄せにする
+    p
+      label.liner
+        span.label 画像のマージン
+        input(
+          type="range",
+          ng-model="config.margin",
+          min="10",
+          max="200")
+        span.helper {{ config.margin }}
+    p
+      label.liner
+        span.label 情報欄の幅
+        input(
+          type="range",
+          ng-model="config.panelWidth",
+          min="220",
+          max="700")
+        span.helper {{ config.panelWidth }}

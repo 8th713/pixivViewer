@@ -1,0 +1,91 @@
+.PVS input {
+  -webkit-appearance: none;
+          appearance: none;
+
+  display: inline-block;
+  padding: 0 10px;
+  line-height: 38px;
+
+  color: #258fb8;
+  font-family: 'メイリオ', Meiryo, Sans-Serif;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:after {
+    content: 'デフォルト';
+  }
+
+  &:checked:after {
+    content: '降順';
+  }
+}
+
+.PVF {
+  display: inline;
+  vertical-align: middle;
+  padding: 0 10px;
+
+  .icon {
+    -webkit-appearance: none;
+            appearance: none;
+    margin-right: 5px;
+    font-size: 18px;
+
+    &:before {
+      font-family: 'Icon';
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1;
+    };
+
+    &:hover {
+      color: #999;
+    }
+
+    &:active {
+      color: #f99;
+    }
+
+    &:checked {
+      color: #f55;
+
+      &:hover {
+        color: #f77;
+      }
+
+      &:active {
+        color: #f99;
+      }
+    }
+  }
+
+  .sorted {
+    &:before {
+      content: '\2691';
+    }
+  }
+
+  .filtered{
+    &:before {
+      content: '\e70a';
+    }
+
+    &:checked:before {
+      content: '\e70b';
+    }
+  }
+
+  .threshold {
+    width: 5em;
+    margin: 0;
+    padding: 4px;
+    text-align: right;
+  }
+}
+
+.PV-hidden {
+  visibility: hidden;
+}

@@ -1,0 +1,128 @@
+.center-box (@pos: absolute, @val: 0) {
+  position: @pos;
+  top: @val;
+  left: @val;
+  right: @val;
+  bottom: @val;
+}
+
+.btn (@bg:#428bca , @fc:#f2f2f2 ) {
+  margin: 0 5px;
+  padding: .4em 1em;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: .2em;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .05));
+  transition: .2s;
+  background-color: @bg;
+  color: @fc;
+  text-align: center;
+
+  &:hover,
+  &:focus {
+    background-color: darken(@bg, 5%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+  }
+
+  &:active,
+  &.active {
+    background-color: darken(@bg, 10%);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .4);
+  }
+
+  &[disabled],
+  &.disabled {
+    background-color: lighten(@bg, 10%);
+    color: fade(@fc, 70%);
+  }
+}
+
+.box () {
+  .center-box(fixed);
+  .flexbox;
+  .align-items;
+  .justify-content;
+  z-index: 1;
+
+  background-color: rgba(0, 0, 0, .3);
+  color: #333;
+
+  .PV-box {
+    position: relative;
+    .flexbox;
+    width: 80%;
+    height: 90%;
+  }
+
+  .PV-box-inner {
+    overflow: auto;
+    box-sizing: border-box;
+    .flex(1);
+    width: 0;
+    padding: 1em;
+
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, .95);
+    box-shadow: 0 0 0 2px silver;
+  }
+
+  .close {
+    .close;
+  }
+}
+
+.close () {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  width: 1em;
+  height: 1em;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  background-color: transparent;
+  color: #ccc;
+  text-shadow: 0 1px 0 #fff;
+
+  font-size: 24px;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+
+  &:hover {
+    color: #999;
+  }
+
+  &:active {
+    color: #444;
+  }
+}
+
+.icon () {
+  display: block;
+  box-sizing: content-box;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 2px;
+  border: 0;
+
+  background-color: transparent;
+  font-size: 18px;
+  font-family: 'Icon';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  color: #ccc;
+  text-align: center;
+  transition: color .2s;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &:active {
+    color: red;
+  }
+}

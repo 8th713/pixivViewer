@@ -1,0 +1,205 @@
+.PV-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: column;
+  flex-flow: column;
+  width: 300px;
+  max-height: 100%;
+
+  background-color: rgba(0, 0, 0, .7);
+  -webkit-transition: right .2s;
+  transition: right .2s;
+
+  &.closed {
+    right: -300px;
+  }
+
+  button {
+    .icon;
+
+    // Ctrl icons
+    &[data-open]:before        { content: '\23ee'; }
+    &[data-fit]:before         { content: '\e746'; }
+    &[data-bookmark]:before    { content: '\2611'; }
+    &[data-favorite]:before    { content: '\2665'; }
+    &[data-download]:before    { content: '\1f4e5'; }
+    &[data-show-config]:before { content: '\2699'; }
+
+    &[data-open='true']:before  { content: '\23ed'; }
+    &[data-fit='true']:before   { content: '\e744'; }
+
+    &[data-bookmark='true'],
+    &[data-favorite='true'] {
+      color: #ff7c93;
+
+      &:hover {
+        color: #e95464;
+      }
+
+      &:active {
+        color: red;
+      }
+    }
+
+    // Tool icons
+    &[data-info]:before     { content: '\e705'; }
+    &[data-rate]:before     { content: '\1f44d'; }
+    &[data-tags]:before     { content: '\e70d'; }
+    &[data-desc]:before     { content: '\e718'; }
+    &[data-comment]:before  { content: '\e720'; }
+
+    &[data-info='true'],
+    &[data-rate='true'],
+    &[data-tags='true'],
+    &[data-desc='true'],
+    &[data-comment='true'] {
+      color: #51a351;
+
+      &:hover {
+        color: #62c462;
+      }
+
+      &:active {
+        color: red;
+      }
+    }
+  }
+}
+
+.PV-ctrl {
+  position: absolute;
+  top: 0;
+  left: -22px;
+
+  border-radius: 4px 0 0 4px;
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.PV-tool {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: -webkit-flex;
+  display: flex;
+
+  border-bottom: 1px solid #333;
+  padding: 0 0 0 20px;
+}
+
+.PV-profile {
+  width: 100%;
+  min-height: 109px;
+  margin-top: 23px;
+  color: #efefef;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #999;
+  }
+
+  & > div {
+    margin: 3px 6px;
+    border: 1px solid #999;
+    padding: 5px;
+    border-radius: 3px;
+  }
+
+  .meta,
+  .tools {
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    li {
+      float: left;
+      margin-right: 8px;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+
+  .tag {
+    margin: 0 4px 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+
+  .comment-item {
+    border-bottom: 1px solid #999;
+    list-style: none;
+
+    &:last-of-type {
+      border-bottom: 0;
+    }
+  }
+
+  .comment-date {
+    color: #999;
+  }
+}
+
+.PV-rate {
+  position: relative;
+  width: 170px;
+  font-size: 0;
+
+  button {
+    display: inline-block;
+    width: 17px;
+    padding: 0;
+    color: gray;
+    transition: .5s;
+  }
+
+  &:not(.complete):hover button {
+    color: gold;
+  }
+
+  &:not(.complete):hover button:hover:after,
+  & .mark:after {
+    content: attr(value);
+    display: block;
+    position: absolute;
+    top: 4px;
+    right: -20px;
+    color: #fff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+  }
+
+  &:not(.complete):hover button:hover ~ button {
+    color: gray;
+  }
+
+  &:not(.complete):hover button:active {
+    color: red;
+  }
+
+  &.complete button {
+    pointer-events: none;
+    color: #51a351;
+  }
+
+  .mark ~ button {
+    color: gray;
+  }
+}
