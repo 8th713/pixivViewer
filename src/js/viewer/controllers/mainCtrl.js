@@ -130,7 +130,7 @@ function ($scope, config, Model, page, bookmark, download, utils) {
   function handleClick(evt) {
     var target = evt.target;
 
-    if (target.matchesSelector(selectors)) {
+    if ( evt.button === 0 && target.matchesSelector(selectors)) {
       page.open();
       $scope.init(target);
       return utils.cancelEvent(evt);
