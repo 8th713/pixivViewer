@@ -3,7 +3,8 @@ Thumbs.db
 
 dist
 node_modules
+TODO.md
 *.sublime-project
 *.sublime-workspace
+*.bat
 *.pem
-memo.md

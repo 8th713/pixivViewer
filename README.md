@@ -2,7 +2,7 @@
 Extension for viewing comfortably pixiv.
 
 ## Installation and Usage
-Write later
+[pixivViewer - 8th713lab](https://sites.google.com/site/8th713lab/Home/chrome/pixivviewer)
 
 ## Open Source Projects Used
 * [AngularJS](http://angularjs.org)

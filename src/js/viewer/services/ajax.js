@@ -1,7 +1,7 @@
 angular.module('app.services')
 .factory('bookmark', ['$q', '$rootScope', 'utils', function ($q, $rootScope, utils) {
   var URL = 'http://www.pixiv.net/bookmark_add.php?',
-      SELECTOR = 'form[action="bookmark_add.php"]';
+      SELECTOR = '.layout-body';
 
   return {
     add: function (form) {
@@ -31,7 +31,7 @@ angular.module('app.services')
 
       xhr = new XMLHttpRequest();
       xhr.addEventListener('load', function (evt) {
-        dfd.resolve(evt.target.response.querySelector(SELECTOR).outerHTML);
+        dfd.resolve(evt.target.response.querySelector(SELECTOR).innerHTML);
         $rootScope.$apply();
       });
       xhr.responseType = 'document';

@@ -15,10 +15,16 @@ angular.module('app', [
 
   function bindMessageEvent() {
     window.addEventListener('message', function (evt) {
+      if (evt.source === this && evt.data === 'init') {
+        $('.PV-bookmark .PV-box').on('click', '.tag', function() {
+          window.pixiv.tag.toggle($(this).dataset('tag'));
+          return false;
+        });
+      }
       if (evt.source === this && evt.data === 'tagSetup') {
+        this.pixiv.bookmarkTag.setup('.tag-cloud-container');
         this.pixiv.tag.setup();
-        this.pixiv.ui.form.setup();
-        $('#comment').focus();
+        $('.PV-bookmark input[placeholder="ブックマークコメント"]').focus();
       }
     }, true);
   }
@@ -48,6 +54,7 @@ angular.module('app', [
   xhr.onload = function () {
     doc.body.insertAdjacentHTML('beforeend', this.response);
     angular.bootstrap(doc.querySelector('.PV'), ['app']);
+    window.postMessage('init', '*');
   };
   xhr.open('GET', url, true);
   xhr.send();
