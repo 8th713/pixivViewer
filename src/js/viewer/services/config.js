@@ -12,34 +12,42 @@ angular.module('app.services')
   margin: 20,
   panelWidth: 300
 })
-.run(['$rootScope', 'config', function ($rootScope, config) {
+.factory('storage', ['config', function (config) {
   var storage = chrome.storage.local,
-      obj = {}, save;
+      defaults = angular.copy(config),
+      save = _.debounce(set, 1000),
+      obj = {};
 
-  $rootScope.config = config;
-  storage.get(null, function (items) {
-    // Delete old version config
-    if (items.hasOwnProperty('paddingLeft')) {
-      delete items.paddingLeft;
-      storage.remove('paddingLeft');
+  return {
+    get: function (callback) {
+      storage.get(null, function (items) {
+        // Detects error.
+        if (chrome.runtime.lastError) {
+          console.error('エラー: %i', chrome.runtime.lastError.message);
+        }
+        if (!items) {
+          console.error('エラー: ストレージが読み込めていない.');
+          items = {};
+        }
+
+        _.extend(config, items);
+        callback(config);
+      });
+    },
+    clear: function (callback) {
+      storage.clear(function () {
+        callback(defaults);
+      });
+    },
+    watch: function (val, key) {
+      this.$watch('config.' + key, function (newVal, oldVal) {
+        if (newVal !== oldVal) {
+          obj[key] = newVal;
+          save();
+        }
+      });
     }
-
-    // console.log(items);
-    _.extend(config, items);
-    _.each(config, watch, $rootScope);
-    $rootScope.$apply();
-  });
-
-  save = _.debounce(set, 1000);
-
-  function watch(val, key) {
-    this.$watch('config.' + key, function (newVal, oldVal) {
-      if (newVal !== oldVal) {
-        obj[key] = newVal;
-        save();
-      }
-    });
-  }
+  };
 
   function set() {
     storage.set(obj, reset);

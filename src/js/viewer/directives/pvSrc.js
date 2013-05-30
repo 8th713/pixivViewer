@@ -1,5 +1,5 @@
 angular.module('app.directives')
-.directive('pvSrc', ['$http', 'config', function ($http, config) {
+.directive('pvSrc', ['config', function (config) {
   return function (scope, $el, attrs) {
     var el = $el[0], style = el.style, view = el.parentNode;
 
