@@ -23,7 +23,7 @@ angular.module('app.services')
       storage.get(null, function (items) {
         // Detects error.
         if (chrome.runtime.lastError) {
-          console.error('エラー: %i', chrome.runtime.lastError.message);
+          console.error('エラー: %s', chrome.runtime.lastError.message);
         }
         if (!items) {
           console.error('エラー: ストレージが読み込めていない.');
