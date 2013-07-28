@@ -6,7 +6,7 @@ Extension for viewing comfortably pixiv.
 
 ## Open Source Projects Used
 * [AngularJS](http://angularjs.org)
-* [Underscore.js](http://underscorejs.org)
+* [Lo-Dash](http://lodash.com)
 * [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
 * [Fontello](http://fontello.com)
 
