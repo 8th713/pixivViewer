@@ -151,6 +151,13 @@ module.exports = function(grunt) {
         files: 'src/js/filter/**/*.js',
         tasks: ['concat:filter']
       }
+    },
+    pack: {
+      dev: {
+        src: 'dist',
+        dest: '<%= pkg.version %>',
+        pem: '<%= pkg.name %>'
+      }
     }
   });
 
@@ -161,7 +168,26 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-regarde');
 
+  grunt.registerMultiTask('pack', 'Creating a package', function () {
+    var done = this.async();
+    var dir = this.files[0].src[0];
+
+    if (!grunt.file.isDir(dir)) {
+      return;
+    }
+
+    var options = {
+      cmd: 'packaging',
+      args: [
+        dir,
+        this.files[0].dest,
+        this.data.pem
+      ]
+    };
+
+    grunt.util.spawn(options, done);
+  });
   grunt.registerTask('build', ['copy', 'jade:dev', 'less:dev', 'concat']);
-  grunt.registerTask('production', ['copy', 'jade:production', 'less:production', 'concat:libs', 'uglify']);
+  grunt.registerTask('production', ['copy', 'jade:production', 'less:production', 'concat:libs', 'uglify', 'pack']);
   grunt.registerTask('default',    ['build', 'regarde']);
 };
