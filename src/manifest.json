@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name":         "<%= pkg.name %>",
+  "name":         "pixivViewer",
   "description":  "<%= pkg.description %>",
   "version":      "<%= pkg.version %>",
   "homepage_url": "http://sites.google.com/site/8th713lab/Home/chrome/pixivviewer",

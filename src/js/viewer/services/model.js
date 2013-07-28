@@ -31,8 +31,8 @@ function (config, extract, bookmark, favorite, rate, comments) {
     setPath: function () {
       var res = this.imgUrl;
 
-      if (this.length > 1) {
-        res += '_p' + this.page;
+      if (this.length >= 1) {
+        res += '_big_p' + this.page;
       }
       res += this.imgExt;
       this.path = res || '';

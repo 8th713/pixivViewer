@@ -1,6 +1,6 @@
 {
   "name": "pixivviewer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Extension for viewing comfortably pixiv.",
   "author": "8th713",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "grunt-contrib-jade": "~0.6.0",
     "grunt-contrib-less": "~0.5.2",
     "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.2.1",
+    "grunt-contrib-uglify": "~0.2.2",
     "grunt-regarde": "~0.1.1"
   }
 }
