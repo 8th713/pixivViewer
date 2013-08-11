@@ -1,28 +1,30 @@
-div
-  a(href="{{ baseUrl }}?mode=medium&illust_id={{ model.illustId }}") {{ model.title }}
-  span &ensp;/&ensp;
-  a(href="{{ baseUrl }}?id={{ model.auteurId }}") {{ model.auteur }}
-div(ng-show="config.infoEnabled") 閲覧数:{{ model.rtv }} 評価回数:{{ model.rtc }} 総合点:{{ model.rtt }}
-div(
+base = 'http://www.pixiv.net/member_illust.php'
+.PV-data
+  a(ng-href="#{base}?mode=medium&illust_id={{ model.illustId }}") {{ model.title }}
+  &nbsp;|&nbsp;
+  a(ng-href="#{base}?id={{ model.auteurId }}") {{ model.auteur }}
+.PV-data(ng-show="config.infoEnabled").
+  閲覧数:   {{ model.rtv }}
+  評価回数: {{ model.rtc }}
+  総合点:   {{ model.rtt }}
+.PV-data.PV-meta(
   ng-show="config.infoEnabled",
   ng-bind-html-unsafe="model.meta")
-div(ng-show="config.rateEnabled")
-  div.PV-rate(ng-Class="{complete: model.score}")
+.PV-data.PV-rate(
+  ng-controller="RateCtrl",
+  ng-show="!model.myPage && config.rateEnabled")
+  .rate-box.cf(ng-class="{complete: model.score}")
     i = 1
     l = 10
     - for (; i<=10; i++)
-      button(
+      button.PV-icon(
         tabindex="-1",
         ng-class="{mark: model.score == #{i}}",
-        ng-click="model.rate(#{i})"
-        value=i) ★
-div(
+        ng-click="rate(#{i})"
+        value=i)
+.PV-data.PV-tag(
   ng-show="config.tagsEnabled",
   ng-bind-html-unsafe="model.tags")
-div(
+.PV-data(
   ng-show="config.descEnabled",
   ng-bind-html-unsafe="model.desc")
-div(
-  ng-show="config.commentEnabled && model.comments",
-  ng-bind-html-unsafe="model.comments",
-  pv-show-comments="config.commentEnabled")

@@ -1,4 +1,4 @@
-angular.module('app.services')
+angular.module('app.services.config', [])
 .value('config', {
   panelEnabled: true,
   fitEnabled: true,
@@ -6,54 +6,44 @@ angular.module('app.services')
   rateEnabled: true,
   tagsEnabled: true,
   descEnabled: true,
-  commentEnabled: false,
   hideScrollBar: true,
   alignLeft: true,
   margin: 20,
   panelWidth: 300
 })
 .factory('storage', ['config', function (config) {
+  'use strict';
+
   var storage = chrome.storage.local,
-      defaults = angular.copy(config),
-      save = _.debounce(set, 1000),
-      obj = {};
+      temp = {};
+
+  var set = _.debounce(function () {
+    storage.set(temp, function () {
+      temp = {};
+    });
+  }, 500);
 
   return {
     get: function (callback) {
       storage.get(null, function (items) {
-        // Detects error.
         if (chrome.runtime.lastError) {
           console.error('エラー: %s', chrome.runtime.lastError.message);
         }
-        if (!items) {
-          console.error('エラー: ストレージが読み込めていない.');
-          items = {};
-        }
-
+        items = items || {};
         _.extend(config, items);
         callback(config);
       });
     },
-    clear: function (callback) {
-      storage.clear(function () {
-        callback(defaults);
-      });
+    clear: function () {
+      storage.clear();
     },
     watch: function (val, key) {
       this.$watch('config.' + key, function (newVal, oldVal) {
         if (newVal !== oldVal) {
-          obj[key] = newVal;
-          save();
+          temp[key] = newVal;
+          set();
         }
       });
     }
   };
-
-  function set() {
-    storage.set(obj, reset);
-  }
-
-  function reset() {
-    obj = {};
-  }
 }]);

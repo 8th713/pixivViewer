@@ -1,38 +1,35 @@
 details(open)
   summary Config
-  div.inner
-    p
+  .inner
+    .config-item
       input(
         type="checkbox",
         ng-model="config.hideScrollBar",
         id="PV-hide-scrollbar")
       label(for="PV-hide-scrollbar") Viewer 表示時スクロールバーを自動で隠す
-    p
+    .config-item
       input(
         type="checkbox",
         ng-model="config.alignLeft",
         id="PV-align-left")
       label(for="PV-align-left") 情報欄表示中は画像を左寄せにする
-    p
-      label.liner
-        span.label 画像のマージン
-        input(
+    .config-item
+      label.align-horizontal
+        span.range-label 画像のマージン
+        input.range-ctrl(
           type="range",
           ng-model="config.margin",
           min="10",
           max="200")
-        span.helper {{ config.margin }}
-    p
-      label.liner
-        span.label 情報欄の幅
-        input(
+        span.range-helper {{ config.margin }}
+    .config-item
+      label.align-horizontal
+        span.range-label 情報欄の幅
+        input.range-ctrl(
           type="range",
           ng-model="config.panelWidth",
           min="220",
           max="700")
-        span.helper {{ config.panelWidth }}
-    p
-      input.clear(
-        type="button",
-        value="設定をリセットする",
-        ng-click="clear()")
+        span.range-helper {{ config.panelWidth }}
+    .config-item
+      button.btn.btn-danger(ng-click="clear()") 設定をリセットする

@@ -1,11 +1,13 @@
-div.PV-bookmark(ng-show="bookmarkForm")
-  div.PV-box
-    div.PV-box-inner(pv-include="bookmarkForm")
-    input.close(
-      type="button",
-      ng-click="bookmarkForm = false"
-      value="×")
-button(
-  ng-click="showBookmark(model.illustId)",
-  data-bookmark='{{ model.bookmarkState }}',
-  title='ブックマーク')
+div(ng-controller="BookmarkCtrl")
+  .PV-bookmark.PV-overlay(ng-show="bookmarkForm")
+    .PV-dialog
+      .PV-dialog-header
+        h4.PV-dialog-title ブックマーク編集
+        button.PV-close(ng-click="hide()")
+      .PV-dialog-body(
+        ng-bind-html-unsafe="bookmarkForm",
+        pv-submit="submit($event)")
+  button.PV-icon(
+    ng-click="!model.myPage && show()",
+    data-bookmark='{{ model.bookmarkState }}',
+    title='ブックマーク')

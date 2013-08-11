@@ -45,7 +45,8 @@
   ],
   "web_accessible_resources": [
     "style.css",
-    "fonts/icon.woff",
+    "inject.js",
+    "fonts/font.woff",
     "viewer.html",
     "filter.html"
   ]

@@ -1,5 +1,7 @@
-angular.module('app.services')
-.factory('page', ['config', function (config) {
+angular.module('app.services.page', [])
+.factory('page', ['$rootScope', 'config', 'util', function (scope, config, util) {
+  'use strict';
+
   var classList = document.documentElement.classList;
 
   return {
@@ -25,6 +27,14 @@ angular.module('app.services')
     close: function () {
       classList.remove('no-iframe');
       this.showScrollBar();
+    },
+    scroll: function (img, callback) {
+      util.scroll({
+        val: util.getPos(img),
+        done: function () {
+          scope.$apply(callback);
+        }
+      });
     }
   };
 }]);

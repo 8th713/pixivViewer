@@ -1,0 +1,14 @@
+div(ng-controller="CommentsCtrl")
+  .PV-comments.PV-overlay(ng-show="comments")
+    .PV-dialog
+      .PV-dialog-header
+        h4.PV-dialog-title {{model.title}} のコメント
+        button.PV-close(ng-click="hide()")
+      .PV-dialog-body
+        ol.PV-comments-list(ng-bind-html-unsafe="comments.join('')")
+        .PV-comments-more(ng-show="more")
+          button.btn(ng-click="getMore()") もっと見る
+  button.PV-icon(
+    ng-click="show()",
+    data-comments='',
+    title='コメント表示')

@@ -1,0 +1,68 @@
+.PV-option {
+  font-size: 16px;
+
+  details {
+    margin: 1em;
+  }
+
+  .PV-close {
+    right: 1em;
+  }
+
+  .inner {
+    margin: 1em;
+  }
+
+  .config-item {
+    margin: 1em 0;
+  }
+
+  .range-label {
+    .flex(0, 8em);
+    text-align: right;
+
+    &:after {
+      content: ':';
+    }
+  }
+
+  .range-ctrl {
+    .flex(1);
+    margin: 0 1em;
+  }
+
+  .range-helper {
+    .flex(0, 3em);
+    border: 1px solid @gray-80;
+    border-radius: 4px;
+    font-size: 90%;
+    text-align: center;
+  }
+
+  td {
+    padding: 6px;
+    border: 1px solid @gray-80;
+  }
+
+  kbd {
+    margin-right: 6px;
+    padding: 4px 1em;
+    border-radius: 4px;
+    background-color: #fff;
+    .horizontal-grd-black;
+    box-shadow: inset -1px -1px @gray-60, 0 0 0 1px @gray-60;
+    font-size: 14px;
+  }
+
+  .desc {
+    margin: 1em 0;
+  }
+
+  .desc-header {
+    font-weight: bold;
+  }
+
+  .desc-body {
+    margin-left: 1em;
+  }
+}

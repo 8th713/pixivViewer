@@ -1,0 +1,83 @@
+.PV-icon {
+  display: inline-block;
+  box-sizing: border-box;
+  width: @icon-size;
+  height: @icon-size;
+  margin: 0;
+  padding: 3px;
+  border: 0;
+
+  background-color: transparent;
+  color: @gray-80;
+
+  font-size: 16px;
+  font-family: 'Icon';
+  line-height: 1;
+
+  text-align: center;
+  transition: color .2s;
+
+  &:hover {
+    color: #fff;
+  }
+
+  // Ctrl icons
+  &[data-open]:before        { content: '\e000'; }
+  &[data-open='true']:before { content: '\e001'; }
+  &[data-fit]:before         { content: '\e002'; }
+  &[data-fit='true']:before  { content: '\e003'; }
+  &[data-bookmark]:before    { content: '\e004'; }
+  &[data-favorite]:before    { content: '\e005'; }
+  &[data-download]:before    { content: '\e006'; }
+  &[data-option]:before      { content: '\e007'; }
+
+
+  &[data-bookmark='true'],
+  &[data-favorite='true'] {
+    color: @danger;
+
+    &:hover {
+      color: @pink;
+    }
+
+    &:active {
+      color: red;
+    }
+  }
+
+  // Tool icons
+  &[data-info]:before     { content: '\e008'; }
+  &[data-rate]:before     { content: '\e009'; }
+  &[data-tags]:before     { content: '\e00a'; }
+  &[data-desc]:before     { content: '\e00b'; }
+  &[data-comments]:before { content: '\e00c'; }
+
+  &[data-info='true'],
+  &[data-rate='true'],
+  &[data-tags='true'],
+  &[data-desc='true'] {
+    color: @success;
+
+    &:hover {
+      color: @lime;
+    }
+
+    &:active {
+      color: red;
+    }
+  }
+
+  // Share icons
+  &[data-twitter]:before {
+    content: '\e010';
+    color: @twitter;
+  }
+
+
+  // star rating
+  .PV-rate &:before     { content: '\e00d'; }
+
+  &:active {
+    color: red;
+  }
+}

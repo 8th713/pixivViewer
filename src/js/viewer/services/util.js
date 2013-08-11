@@ -1,6 +1,9 @@
-angular.module('utils', [])
-.factory('utils', [function () {
+angular.module('app.services.util', [])
+.factory('util', [function () {
+  'use strict';
+
   var raf = window.requestAnimationFrame,
+      caf = window.cancelAnimationFrame,
       performance = window.performance;
 
   var ease = {
@@ -20,16 +23,18 @@ angular.module('utils', [])
   };
 
   /**
+   * Scroll
+   *
    * @param {object} options
    *   - val                {Number}
    *   - done(optional)     {Function}
    *   - root(optional)     {DOM Element}
    *   - duration(optional) {Number}
    *   - easing(optional)   {String}
-   * @returns {Promise}
+   * @returns {Functin} Cancel scroll
    */
   function scroll(options) {
-    var easing, root, val, begin, from, distance, duration;
+    var easing, root, val, begin, from, distance, duration, afId;
 
     function loop(now) {
       var elapsed = now - begin;
@@ -37,10 +42,11 @@ angular.module('utils', [])
       root.scrollTop = easing(elapsed, from, distance, duration);
       if (duration < elapsed || root.scrollTop === val) {
         root.scrollTop = val;
+        caf(afId);
         options.done();
         return;
       }
-      raf(loop);
+      afId = raf(loop);
     }
 
     options = _.defaults(options, scrollDefaults);
@@ -53,7 +59,11 @@ angular.module('utils', [])
     from = root.scrollTop;
     distance = val - from;
     duration = options.duration;
-    raf(loop);
+    afId = raf(loop);
+
+    return function () {
+      caf(afId);
+    };
   }
 
   /**
@@ -64,30 +74,8 @@ angular.module('utils', [])
     return parseInt(img.y - window.innerHeight / 3, 10);
   }
 
-  /**
-   * @param {Object} obj
-   * @returns {String}
-   */
-  function param(obj) {
-    return _.map(obj, function (val, key) {
-      return encodeURIComponent(key) + "=" + encodeURIComponent(val);
-    }).join("&");
-  }
-
-  /**
-   * @param {DOM Event Object} evt
-   * @returns {Boolean=false}
-   */
-  function cancelEvent(evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
-    return false;
-  }
-
   return {
     scroll: scroll,
-    getPos: getPos,
-    param: param,
-    cancelEvent: cancelEvent
+    getPos: getPos
   };
 }]);

@@ -8,10 +8,9 @@
 }
 
 .PV-wrapper {
+  &:extend(.rich-center);
+
   .center-box;
-  .flexbox;
-  .align-items;
-  .justify-content;
 }
 
 .PV-view {
@@ -21,10 +20,6 @@
   width: 0;
   max-height: 100%;
   text-align: center;
-
-  &.align-left {
-    text-align: left;
-  }
 
   &::-webkit-scrollbar {
     width: 0;
@@ -37,7 +32,7 @@
 
   border-radius: 1px;
   background: #fff;
-  box-shadow: 0 0 0 5px rgba(255,255,255,.7);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, .7);
   transition: width .2s, height .2s;
 }
 
@@ -47,7 +42,7 @@
   left: 0;
   padding: 0 1em;
   border-radius: 0 0 4px 0;
-  background-color: rgba(0,0,0,.7);
+  background-color: rgba(0, 0, 0, .7);
 }
 
 .PV-alert {
@@ -60,4 +55,8 @@
   font-size: 4em;
   text-align: center;
   cursor: default;
+}
+
+.PV a {
+  color: @primary;
 }

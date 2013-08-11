@@ -1,11 +1,14 @@
-div.PV-option(ng-show="showOpt")
-  div.PV-box
-    div.PV-box-inner
-      include config
-      include help
-      include about
-    input.close(
-      type="button",
-      ng-click="showOpt = false"
-      value="×")
-button(data-show-config="", ng-click="showOpt = true", title='設定')
+div(ng-controller="OptionCtrl")
+  .PV-option.PV-overlay(ng-show="showOpt")
+    .PV-dialog
+      .PV-dialog-header
+        h4.PV-dialog-title オプション
+        button.PV-close(ng-click="hide()")
+      .PV-dialog-body
+        include config
+        include help
+        include about
+  button.PV-icon(
+    data-option="",
+    ng-click="show()",
+    title='設定')

@@ -54,8 +54,8 @@ angular.module('pvSorter', [])
 
 (function (win, doc) {
   var root = doc.querySelector('.menu-items'),
-      template = '<li class="PVS">' +
-        '<input type="checkbox" title="Reverse" pv-sorter>' +
+      template = '<li>' +
+        '<input class="PVS" type="checkbox" title="Reverse" pv-sorter>' +
         '</li>';
 
   root.insertAdjacentHTML('beforeend', template);
