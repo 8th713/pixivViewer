@@ -141,6 +141,6 @@ module.exports = function(grunt) {
   grunt.registerTask('pre',     ['copy', 'jade', 'less']);
   grunt.registerTask('build',   ['pre', 'concat']);
   grunt.registerTask('min',     ['pre', 'concat:libs', 'uglify']);
-  grunt.registerTask('release', ['min', 'package']);
+  grunt.registerTask('release', ['min', 'packaging']);
   grunt.registerTask('default', ['build', 'watch']);
 };
