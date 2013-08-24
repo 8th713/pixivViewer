@@ -29,6 +29,11 @@
         ng-click="config.rateEnabled = !config.rateEnabled"
         title='レート表示切り替え')
       button.PV-icon(
+        data-qr='{{ config.qrEnabled }}',
+        ng-show="!model.myPage && model.questionnaire"
+        ng-click="config.qrEnabled = !config.qrEnabled"
+        title='アンケート表示切り替え')
+      button.PV-icon(
         data-tags='{{ config.tagsEnabled }}',
         ng-click="config.tagsEnabled = !config.tagsEnabled"
         title='タグリスト切り替え')

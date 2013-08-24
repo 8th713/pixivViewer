@@ -210,6 +210,8 @@ function (scope, keys) {
 }])
 .controller('RateCtrl', ['$scope', 'http', 'keys',
 function (scope, http, keys) {
+  'use strict';
+
   var RATING_URL = 'http://www.pixiv.net/rpc_rating.php';
 
   scope.rate = function (score) {
@@ -231,4 +233,27 @@ function (scope, http, keys) {
 
   var perfect = scope.rate.bind(scope, 10);
   keys.add(keys.S, perfect);
+}])
+.controller('QuestionnaireCtrl', ['$scope', 'http',
+function (scope, http) {
+  'use strict';
+
+  var RATING_URL = 'http://www.pixiv.net/rpc_rating.php';
+
+  scope.answer = function (stat) {
+    var model = scope.model;
+    var form = new FormData();
+
+    form.append('mode', 'save2');
+    form.append('i_id', model.illustId);
+    form.append('u_id', model.myId);
+    form.append('qr', model.qr);
+    form.append('num', stat.id);
+
+    return http.postForm(RATING_URL, form).then(function () {
+      model.questionnaire.answered = true;
+      stat.active = true;
+      stat.count += 1;
+    });
+  };
 }]);

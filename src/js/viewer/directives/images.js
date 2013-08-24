@@ -21,6 +21,11 @@ angular.module('app.directives.images', [])
     }
 
     function onerror() {
+      if (img.src.indexOf('_big_p') !== -1) {
+        preLoad(img.src.replace('_big_p', '_p'));
+        return;
+      }
+
       scope.$apply(function () {
         scope.view.loading = false;
         scope.setMessage('Unable to load the image.');
@@ -55,6 +60,15 @@ angular.module('app.directives.images', [])
       // style.marginRight = mr;
     }
 
+    function preLoad(url) {
+      img = new Image();
+      img.onload = onload;
+      img.onerror = onerror;
+      setTimeout(function () {
+        img.src = url;
+      }, 200);
+    }
+
     function changeConfig(newVal, oldVal) {
       if (newVal !== oldVal) {
         resize();
@@ -67,13 +81,7 @@ angular.module('app.directives.images', [])
         scope.view.loading = true;
         scope.setMessage('Loading image.');
         imgParent.hidden = true;
-
-        img = new Image();
-        img.onload = onload;
-        img.onerror = onerror;
-        setTimeout(function () {
-          img.src = value;
-        }, 200);
+        preLoad(value);
       } else {
         imgParent.hidden = true;
       }

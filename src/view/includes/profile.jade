@@ -10,18 +10,8 @@ base = 'http://www.pixiv.net/member_illust.php'
 .PV-data.PV-meta(
   ng-show="config.infoEnabled",
   ng-bind-html-unsafe="model.meta")
-.PV-data.PV-rate(
-  ng-controller="RateCtrl",
-  ng-show="!model.myPage && config.rateEnabled")
-  .rate-box.cf(ng-class="{complete: model.score}")
-    i = 1
-    l = 10
-    - for (; i<=10; i++)
-      button.PV-icon(
-        tabindex="-1",
-        ng-class="{mark: model.score == #{i}}",
-        ng-click="rate(#{i})"
-        value=i)
+include rate
+include questionnaire
 .PV-data.PV-tag(
   ng-show="config.tagsEnabled",
   ng-bind-html-unsafe="model.tags")

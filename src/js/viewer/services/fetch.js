@@ -27,7 +27,7 @@ angular.module('app.services.fetch', [])
 
     res.myId     = getId('rpc_e_id').textContent;               // 自分のナンバー
     res.auteurId = getId('rpc_u_id').textContent;               // 作者のナンバー
-    res.qr       = getId('rpc_qr').textContent;                 // 謎
+    res.qr       = getId('rpc_qr').textContent;                 // アンケートの有無
     res.tt       = query('input[name="tt"]').value;             // トークン
     // res.sId      = query('input[name="from_sid"]') ?
     //                query('input[name="from_sid"]').value : '';  // 謎
@@ -53,6 +53,8 @@ angular.module('app.services.fetch', [])
     res.rtc  = +query('.rated-count').textContent; // 評価回数
     res.rtt  = +query('.score-count').textContent; // 総合点
     res.tags = query('.tags-container').innerHTML; // タグリスト
+
+    res.questionnaire = getQuestionnaire(query, +res.qr);
 
     res.pageTitle = res.title + ' | ' + res.auteur;
     return res;
@@ -92,5 +94,40 @@ angular.module('app.services.fetch', [])
         str = (el && el.innerHTML) || 'no description';
 
     return str;
+  }
+
+  function getQuestionnaire(q, qr) {
+    if (!qr) {
+      return;
+    }
+
+    var question = q('.questionnaire>.stats>h1').textContent;
+    var answer = q('.questionnaire>.toggle-stats');
+
+    if (answer) {
+      answer = answer.textContent.replace(/^.+「(.+)」.+$/, '$1');
+    }
+
+    var stats = [];
+    var table = q('.questionnaire>.stats>table');
+    var ths = table.getElementsByTagName('th');
+
+    _.each(ths,function (th, index) {
+      var span = th.nextSibling.firstChild;
+      var name = th.textContent;
+
+      stats.push({
+        id: index + 1,
+        name: name,
+        count: +span.textContent,
+        active: answer === name
+      });
+    });
+
+    return {
+      question: question, // 質問
+      stats: stats,       // 統計値
+      answered: !!answer  // 回答済みかどうか
+    };
   }
 }]);

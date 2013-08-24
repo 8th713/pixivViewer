@@ -4,6 +4,7 @@ angular.module('app.services.config', [])
   fitEnabled: true,
   infoEnabled: true,
   rateEnabled: true,
+  qrEnabled: true,
   tagsEnabled: true,
   descEnabled: true,
   hideScrollBar: true,
