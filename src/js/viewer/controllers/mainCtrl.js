@@ -74,10 +74,12 @@ function (scope, storage, page, fetch) {
     _.extend(model, data);
     scope.$broadcast('setPath');
   }
+
   function onReject(err) {
     scope.setMessage(err);
     view.loading = false;
   }
+
   scope.openView = function (img) {
     view.loading = true;
     model = scope.model = create(img);

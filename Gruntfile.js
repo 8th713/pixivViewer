@@ -1,4 +1,8 @@
 module.exports = function(grunt) {
+  'use strict';
+
+  require('load-grunt-tasks')(grunt);
+
   var concat = {
     options: {
       process: function(src, filepath) {
@@ -86,61 +90,47 @@ module.exports = function(grunt) {
     },
     concat: concat,
     uglify: uglify,
-    watch: {
-      jade_viewer: {
-        files: [
-          'src/view/**/*.jade',
-          '!src/view/filter.jade'
-        ],
-        tasks: ['jade:viewer']
+    esteWatch: {
+      options: {
+        dirs: ['src/**/'],
+        livereload: {
+          enabled: false
+        }
       },
-      jade_filter: {
-        files: 'src/view/filter.jade',
-        tasks: ['jade:filter']
+      json: function () {
+        return 'copy:manifest';
       },
-      less: {
-        files: 'src/less/**/*.less',
-        tasks: ['less']
+      jade: function () {
+        return 'jade';
       },
-      viewer: {
-        files: 'src/js/viewer/**/*.js',
-        tasks: ['concat:viewer']
+      js: function (filepath) {
+        var matched = /^src\/js\/([^\/]+)\/.+$/.exec(filepath);
+
+        if (matched) {
+          return 'concat:' + matched[1];
+        }
+        return;
       },
-      sorter: {
-        files: 'src/js/sorter/**/*.js',
-        tasks: ['concat:sorter']
-      },
-      filter: {
-        files: 'src/js/filter/**/*.js',
-        tasks: ['concat:filter']
-      },
-      inject: {
-        files: 'src/js/inject/**/*.js',
-        tasks: ['concat:inject']
+      less: function () {
+        return 'less';
       }
     },
-    packaging: {
+    crx: {
       release: {
-        src: 'dist',
-        dest: 'pixivViewer', // 拡張子を除いたファイル名
         options: {
-          alias: ['<%= pkg.version %>'] // コピー作成
+          pem: 'pixivViewer.pem'
+        },
+        files: {
+          'pixivViewer.crx': 'dist/',
+          '<%= pkg.version %>.crx': 'dist/'
         }
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-jade');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadTasks('tasks');
-
   grunt.registerTask('pre',     ['copy', 'jade', 'less']);
   grunt.registerTask('build',   ['pre', 'concat']);
   grunt.registerTask('min',     ['pre', 'concat:libs', 'uglify']);
-  grunt.registerTask('release', ['min', 'packaging']);
-  grunt.registerTask('default', ['build', 'watch']);
+  grunt.registerTask('release', ['min', 'crx']);
+  grunt.registerTask('default', ['build', 'esteWatch']);
 };

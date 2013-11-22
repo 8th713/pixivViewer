@@ -13,6 +13,7 @@ angular.module('app.services.fetch', [])
   function fetch(html) {
     var getId, query, queryAll, url, res = {};
 
+
     getId    = html.getElementById.bind(html);
     query    = html.querySelector.bind(html);
     queryAll = html.querySelectorAll.bind(html);
@@ -25,10 +26,16 @@ angular.module('app.services.fetch', [])
       throw new Error(query('.error').textContent);
     }
 
-    res.myId     = getId('rpc_e_id').textContent;               // 自分のナンバー
-    res.auteurId = getId('rpc_u_id').textContent;               // 作者のナンバー
-    res.qr       = getId('rpc_qr').textContent;                 // アンケートの有無
-    res.tt       = query('input[name="tt"]').value;             // トークン
+    var s = /pixiv\.user\.id/;
+    var headArr = html.head.textContent.split(/\n/);
+    var line = _.find(headArr, function (v) {
+      return s.test(v);
+    });
+
+    res.myId     = line.replace(/.+'(\d+)'.+/, '$1');     // 自分のナンバー
+    res.auteurId = query('input[name="user_id"]').value;  // 作者のナンバー
+    res.qr       = !!query('.questionnaire');             // アンケートの有無
+    res.tt       = query('input[name="tt"]').value;       // トークン
     // res.sId      = query('input[name="from_sid"]') ?
     //                query('input[name="from_sid"]').value : '';  // 謎
 
@@ -54,7 +61,7 @@ angular.module('app.services.fetch', [])
     res.rtt  = +query('.score-count').textContent; // 総合点
     res.tags = query('.tags-container').innerHTML; // タグリスト
 
-    res.questionnaire = getQuestionnaire(query, +res.qr);
+    res.questionnaire = getQuestionnaire(query, res.qr);
 
     res.pageTitle = res.title + ' | ' + res.auteur;
     return res;
