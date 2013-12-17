@@ -1,10 +1,9 @@
 angular.module('app.services.fetch', [])
-.factory('fetch', ['http', function (http) {
+.factory('fetch', ['$rootScope', 'http', function ($rootScope, http) {
   'use strict';
 
   var IMG_PAGE_URL = 'http://www.pixiv.net/member_illust.php?mode=medium&illust_id=';
-  var auteur = /^.*「.+「(.+)」の.*$/,
-      ext = /(^.+)_m(\.(?:jpe?g|png|gif)).*$/;
+  var ext = /(^.+)_m(\.(?:jpe?g|png|gif)).*$/;
 
   return function (id) {
     return http.getDocument(IMG_PAGE_URL + id).then(fetch);
@@ -26,18 +25,16 @@ angular.module('app.services.fetch', [])
       throw new Error(query('.error').textContent);
     }
 
-    var s = /pixiv\.user\.id/;
-    var headArr = html.head.textContent.split(/\n/);
-    var line = _.find(headArr, function (v) {
-      return s.test(v);
-    });
+    var pd = pixiv(queryAll);
 
-    res.myId     = line.replace(/.+'(\d+)'.+/, '$1');     // 自分のナンバー
-    res.auteurId = query('input[name="user_id"]').value;  // 作者のナンバー
-    res.qr       = !!query('.questionnaire');             // アンケートの有無
-    res.tt       = query('input[name="tt"]').value;       // トークン
-    // res.sId      = query('input[name="from_sid"]') ?
-    //                query('input[name="from_sid"]').value : '';  // 謎
+    res.myId     = pd.user.id;                  // 自分のナンバー
+    res.auteurId = pd.context.userId;           // 作者のナンバー
+    res.qr       = pd.context.hasQuestionnaire; // アンケートの有無
+    res.tt       = pd.context.token;            // トークン
+    res.myPage   = pd.context.self;
+    res.favoriteState = pd.context.favorite;
+    res.title  = pd.context.illustTitle; // 作品名
+    res.auteur = pd.context.userName;    // 作者名
 
     url = query('.works_display img').src;
     url = ext.exec(url);
@@ -46,13 +43,9 @@ angular.module('app.services.fetch', [])
     res.imgExt = url[2];                // 画像URLの拡張子
     res.length = getPagesLength(query); // ページ数
 
-    res.myPage        = res.myId === res.auteurId;
     res.bookmarkState = getBookmarkState(res.myPage, query);
-    res.favoriteState = getFavoriteState(res.myPage, getId);
     res.score         = getScore(query);
 
-    res.title  = query('.work-info .title').textContent;    // 作品名
-    res.auteur = query('title').text.replace(auteur, '$1'); // 作者名
     res.desc   = getCaption(query);                         // 概要
     res.meta   = query('.meta').outerHTML;                  // 投稿日|サイズ|ツール
 
@@ -67,6 +60,30 @@ angular.module('app.services.fetch', [])
     return res;
   }
 
+  function pixiv(queryAll) {
+    var scope = $rootScope.$new(true);
+    var scripts = queryAll('script:not([type]):not([src])');
+    var lines = [];
+
+    _.each(scripts, function (el) {
+      var text = el.textContent.replace(/\s+/g, '');
+
+      if (text.indexOf('pixiv.development') === 0) {
+        lines.push(text);
+      }
+      if (text.indexOf('pixiv.user') === 0) {
+        lines.push(text);
+      }
+      if (text.indexOf('pixiv.context') === 0) {
+        lines.push(text);
+      }
+    });
+
+    scope.$eval(lines.join(''));
+    scope.$destroy();
+    return _.pick(scope.pixiv, ['context', 'user']);
+  }
+
   function getPagesLength(query) {
     var str = query('.meta').textContent,
         result = /漫画 (\d+)P/.exec(str);
@@ -79,13 +96,6 @@ angular.module('app.services.fetch', [])
       return true;
     }
     return query('.bookmark-container>.button-on') ? true : false;
-  }
-
-  function getFavoriteState(isMine, getId) {
-    if (isMine) {
-      return true;
-    }
-    return getId('favorite-button').classList.contains('following') ? true : false;
   }
 
   function getScore(query) {
