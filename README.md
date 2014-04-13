@@ -14,6 +14,6 @@ Extension for viewing comfortably pixiv.
 * [@8th713](https://github.com/8th713)
 
 ## License
-Copyright 2013 8th713.
+Copyright 2013-2014 8th713.
 
 Licensed under the MIT License

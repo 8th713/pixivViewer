@@ -78,7 +78,7 @@ function MainCtrl(        $scope,  keys,  scroller,  page,  config,  promise) {
   function onFulfilled(pix) {
     $scope.pix = pix;
     $scope.msg = '画像を読込中';
-    console.info(pix);
+    // console.info(pix);
   }
 
   function onRejected(err) {
