@@ -118,8 +118,8 @@ module.exports = function(grunt) {
           pem: 'pixivViewer.pem'
         },
         files: {
-          'pixivViewer.crx': 'dist/',
-          '<%= pkg.version %>.crx': 'dist/'
+          'pixivViewer.crx': 'app/',
+          '<%= pkg.version %>.crx': 'app/'
         }
       }
     }
