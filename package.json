@@ -1,0 +1,24 @@
+{
+  "name": "pixivviewer",
+  "version": "2.0.0",
+  "description": "Extension for viewing comfortably pixiv.",
+  "author": "8th713",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "homepage": "https://sites.google.com/site/8th713lab/Home/chrome/pixivviewer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/8th713/pixivViewer.git"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "load-grunt-tasks": "^0.4.0",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-jade": "^0.11.0",
+    "grunt-contrib-less": "^0.11.0",
+    "grunt-contrib-concat": "^0.3.0",
+    "grunt-my-crx": "git+https://github.com/8th713/grunt-my-crx.git",
+    "grunt-este-watch": "^0.1.15"
+  }
+}

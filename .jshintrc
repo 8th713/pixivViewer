@@ -1,0 +1,19 @@
+{
+  "curly": true,
+  "undef": true,
+  "unused": true,
+
+  "boss": true,
+  "eqnull": true,
+  "regexdash": true,
+  "sub": true,
+  "validthis": true,
+
+  "browser": true,
+
+  "globals": {
+    "chrome": false,
+    "angular": false,
+    "_": false
+  }
+}

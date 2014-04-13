@@ -1,0 +1,24 @@
+.container.PV-follow(ng-controller="FollowCtrl")
+  .panel-header フォロー
+  .panel-content(ng-show="loading")
+    p データを読み込んでいます
+  .panel-content(ng-show="error")
+    p データを読み込めませんでした
+  .panel-content(ng-show="pix.self")
+    p 自分です
+  .panel-content.PV-form(ng-show="pix && !pix.self")
+    p.label-group
+      label
+        input(type="radio" value="0" ng-model="restrict")
+        | 公開
+      label
+        input(type="radio" value="1" ng-model="restrict")
+        | 非公開
+    p.btn-group(ng-hide="pix.favorite")
+      button.btn.btn-primary(ng-click="add()"
+                             ng-disabled="wait") 追加
+    p.btn-group(ng-if="pix.favorite")
+      button.btn.btn-primary(ng-click="update()"
+                             ng-disabled="wait") 変更
+      button.btn.btn-danger(ng-click="remove()"
+                            ng-disabled="wait") 解除

@@ -1,0 +1,37 @@
+.PV
+  div(pv-include="view" controller="MainCtrl")
+  div(pv-include="ctrl" controller="PanelCtrl")
+  .PV-notes(notification="")
+  script#view(type="text/ng-template")
+    .PV-main(ng-click="close()")
+      .PV-view(ng-class="{align: config.align && config.panel}"
+               ng-style="{padding: config.margin + 'px'}")
+        .PV-msg(ng-show="msg")
+          span(ng-bind="msg"
+               ng-click="move($event)")
+        img.PV-img(ng-hide="msg"
+                   ng-click="move($event)"
+                   pv-grab=""
+                   pv-fit="config.fit"
+                   pv-load="load()"
+                   pv-err="err()"
+                   pv-src="pix.getSrc(page)")
+      .PV-page(ng-show="pix.comic") {{ page + 1 }} / {{ pix.length }}
+  script#ctrl(type="text/ng-template")
+    .PV-ctrl
+      .PV-panel(ng-include="config.panel")
+      include partials/toolbar
+  script#desc(type="text/ng-template")
+    include partials/description
+  script#bookmark(type="text/ng-template")
+    include partials/bookmark
+  script#follow(type="text/ng-template")
+    include partials/follow
+  script#question(type="text/ng-template")
+    include partials/questionnaire
+  script#comments(type="text/ng-template")
+    include partials/comments
+  script#cog(type="text/ng-template")
+    include partials/cog
+  script#help(type="text/ng-template")
+    include partials/help

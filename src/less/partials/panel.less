@@ -1,0 +1,128 @@
+.PV-desc {
+  .panel-content {
+    padding: 0 !important;
+  }
+
+  .desc {
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    font-size: 12px;
+  }
+
+  .meta li,
+  .tools li {
+    display: inline-block;
+    margin-right: 15px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .tools {
+    display: inline;
+  }
+}
+
+.PV-bookmark {
+  min-width: 300px;
+
+  .layout-body {
+    margin: 0;
+  }
+
+  .bookmark-list-unit {
+    margin-bottom: 0;
+  }
+}
+
+.PV-follow {}
+
+.PV-questionnaire {
+  .question {
+    font-weight: bold;
+
+    &:before {
+      content: "Q.";
+      padding-right: 4px;
+    }
+  }
+
+  .result {
+    .active {
+      font-weight: bold;
+    }
+
+    .count {
+      white-space: nowrap;
+      text-align: right;
+    }
+  }
+
+  button {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+    padding: 8px;
+    border: 0;
+    background-color: transparent;
+    color: #258fb8;
+
+    text-align: left;
+    font-size: 1em;
+    font-family: inherit;
+    cursor: pointer;
+
+    &.active {
+      font-weight: bold;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: #f5f5f5;
+      text-decoration: none;
+      outline: none;
+    }
+
+    &:disabled {
+      pointer-events: none;
+    }
+  }
+}
+
+.PV-comments {
+  min-width: 400px;
+
+  ._comment-item {
+    font-size: 12px;
+
+    .user-icon-container {
+      left: 0;
+    }
+
+    .comment {
+      padding: 0 0 0 60px;
+    }
+  }
+
+  .host-user {
+    .user-icon-container {
+      right: 0;
+      left: auto;
+    }
+
+    .comment {
+      padding: 0 60px 0 0;
+    }
+  }
+
+  .small-stamp {
+    .sticker-container {
+      img { zoom: 50%; }
+    }
+  }
+}
+
+.PV-cog {}
+
+.PV-help {}

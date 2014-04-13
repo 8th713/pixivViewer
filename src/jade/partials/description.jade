@@ -1,0 +1,13 @@
+.container.PV-desc(ng-style="{width:config.width+'px'}")
+  .panel-header(ng-show="loading") データを読み込んでいます
+  .panel-header(ng-show="error") データを読み込めませんでした
+  .panel-header(ng-show="!!pix")
+    - var base = 'http://www.pixiv.net/member_illust.php';
+    a(ng-href="#{base}?mode=medium&illust_id={{ pix.illustId }}") {{ pix.illustTitle }}
+    | &nbsp;/&nbsp;
+    a(ng-href="#{base}?id={{ pix.userId }}") {{ pix.userName }}
+  .panel-content(ng-show="!!pix")
+    .desc(ng-show="config.meta" ng-bind-html="pix.meta")
+    .desc(ng-show="config.chart") 閲覧数:{{pix.rtv}} 評価回数:{{pix.rtc}} 総合点:{{pix.rtt}}
+    .desc(ng-show="config.caption && pix.caption" ng-bind-html="pix.caption")
+    .desc(ng-show="config.tags" ng-bind-html="pix.tags")

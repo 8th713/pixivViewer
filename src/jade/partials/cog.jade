@@ -1,0 +1,26 @@
+.container.PV-cng(ng-style="{width:config.width+'px'}")
+  .panel-header 設定
+  .panel-content.PV-form(ng-controller="CogCtrl")
+    p
+      label
+        input(type="checkbox" ng-model="config.scrollbar")
+        | スクロールバーを自動で隠さない
+    p
+      label
+        input(type="checkbox" ng-model="config.align")
+        | パネル表示中は画像を端に寄せる
+    p
+      label
+        input(type="checkbox" ng-model="config.smallStamp")
+        | コメントのスタンプを縮小する
+    p
+      label(for="PV-margin") 画像のマージン
+      br
+      input#PV-margin(type="number" ng-model="config.margin" min="10" max="200")
+    p
+      label(for="PV-width") パネルの幅
+      br
+      input#PV-width(type="number" ng-model="config.width" min="250")
+    p.btn-group
+      button.btn.btn-danger(ng-click="clear()"
+                            ng-disabled="wait") 設定をリセット

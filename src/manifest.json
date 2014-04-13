@@ -1,0 +1,54 @@
+{
+  "manifest_version": 2,
+  "name":         "pixivViewer",
+  "description":  "<%= pkg.description %>",
+  "version":      "<%= pkg.version %>",
+  "homepage_url": "http://sites.google.com/site/8th713lab/Home/chrome/pixivviewer",
+  "update_url":   "http://sites.google.com/site/8th713lab/Home/chrome/update.xml",
+  "icons": {
+    "128": "icons/128.png",
+    "48":  "icons/48.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.pixiv.net/*"
+      ],
+      "exclude_matches": [
+        "http://www.pixiv.net/novel/*",
+        "http://www.pixiv.net/member_illust.php?mode*"
+      ],
+      "js": [
+        "js/vendor.js",
+        "js/common.js",
+        "js/api.js",
+        "js/viewer.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.pixiv.net/member_illust.php?id*"
+      ],
+      "js": [
+        "js/sorter.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.pixiv.net/search.php*"
+      ],
+      "js": [
+        "js/popular.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "styles.css",
+    "fonts/font.woff",
+    "js/message.js",
+    "index.html"
+  ]
+}

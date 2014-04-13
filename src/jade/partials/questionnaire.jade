@@ -1,0 +1,20 @@
+.container.PV-questionnaire(ng-style="{width:config.width+'px'}"
+                            ng-controller="QuestionnaireCtrl")
+  .panel-header アンケート
+  .panel-content(ng-show="loading")
+    p データを読み込んでいます
+  .panel-content(ng-show="error")
+    p データを読み込めませんでした
+  .panel-content(ng-show="pix && !pix.hasQuestionnaire")
+    p アンケートはありません
+  .panel-content.PV-form(ng-show="pix && pix.hasQuestionnaire")
+    p.question {{ pix.question }}
+    ol(ng-hide="pix.answered || pix.self")
+      li(ng-repeat="stat in pix.stats")
+        button(ng-click="answer(stat)"
+               ng-disabled="wait") {{ stat.name }}
+    table.result(ng-if="pix.answered || pix.self")
+      tbody
+        tr(ng-repeat="stat in pix.stats")
+          td(ng-class="{active: stat.active}") {{ stat.name }}
+          td.count(ng-bind="stat.count")

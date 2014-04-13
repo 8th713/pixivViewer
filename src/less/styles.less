@@ -1,0 +1,70 @@
+@font-face {
+  font-family: 'font-awesome';
+  src: url('fonts/font.woff') format('woff');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@import "partials/page";
+
+.PV {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+
+  @barWidth: 40px;
+  @import "partials/icons";
+  @import "partials/form";
+  @import "partials/main";
+  @import "partials/ctrl";
+}
+
+.PV-notes {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+
+  > div {
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0 0 4px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background-color: #fff;
+
+    &.ng-enter,
+    &.ng-leave {
+      transition: .5s;
+    }
+
+    &.ng-enter {
+      opacity: 0;
+    }
+
+    &.ng-enter-active {
+      opacity: 1;
+    }
+
+    &.ng-leave {
+      opacity: 1;
+    }
+
+    &.ng-leave-active {
+      opacity: 0;
+      line-height: 0;
+      margin: 0;
+      padding: 0 8px;
+    }
+  }
+
+  .log {
+    color: #333;
+  }
+
+  .err {
+    color: #f33;
+  }
+}

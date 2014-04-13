@@ -1,0 +1,116 @@
+> .PV-toolbar {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  background-color: #f5f5f5;
+  box-shadow: 1px 0 2px #666;
+
+  button {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    width: @barWidth;
+    height: @barWidth;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+
+    font-size: 20px;
+
+    background-color: #f5f5f5;
+    color: #999;
+    cursor: pointer;
+
+    &:hover {
+      color: #005580;
+      background-color: #eee;
+    }
+
+    &:focus {
+      outline: 1px dotted;
+      outline-offset: -1px;
+    }
+
+    &:disabled {
+      pointer-events: none;
+    }
+  }
+
+  > li {
+    position: relative;
+    z-index: 1;
+  }
+
+  > .divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+  }
+
+  .current {
+    > div > button,
+    > button {
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+      background-color: #08C;
+      color: #FFF;
+    }
+  }
+
+  .disabled {
+    pointer-events: none;
+  }
+
+  .sub-nav {
+    position: absolute;
+    top: 0;
+    left: 100%;
+
+    display: flex;
+    background-color: #f5f5f5;
+    box-shadow: 1px 1px 2px #666;
+    transition: 0.2s;
+
+    &.ng-hide-add,
+    &.ng-hide-remove {
+      display: flex !important;
+    }
+
+    &.ng-hide {
+      opacity: 0;
+      -webkit-transform: translate(-100%);
+              transform: translate(-100%);
+    }
+  }
+
+  .rater {
+    button {
+      width: 24px;
+    }
+
+    &.rated {
+      pointer-events: none;
+    }
+
+    &:hover,
+    &.rated {
+      > li {
+        > button {
+          color: #f1c40f;
+
+          > span:before { content: "\e600"; }
+        }
+      }
+
+      > li:hover ~ li,
+      > .active ~ li {
+        > button {
+          color: #999;
+
+          > span:before { content: "\e601"; }
+        }
+      }
+    }
+  }
+}

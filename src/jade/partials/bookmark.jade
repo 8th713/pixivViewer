@@ -1,0 +1,9 @@
+.container.PV-bookmark(ng-controller="BookmarkCtrl")
+  .panel-header ブックマーク
+  .panel-content(ng-show="loading")
+    p データを読み込んでいます
+  .panel-content(ng-show="error")
+    p データを読み込めませんでした
+  .panel-content(ng-show="pix.self")
+    p 自分です
+  .panel-content(ng-show="pix && !pix.self" pv-bkm="pix" submit="update(form)")

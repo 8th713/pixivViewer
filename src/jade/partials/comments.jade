@@ -1,0 +1,15 @@
+.container.PV-comments(ng-style="{width:config.width+'px'}"
+                       ng-controller="CommentsCtrl")
+  .panel-header コメント
+  .panel-content(ng-show="loading")
+    p データを読み込んでいます
+  .panel-content(ng-show="error")
+    p データを読み込めませんでした
+  .panel-content(ng-show="pix && !pix.comments.length")
+    p コメントはありません
+  .panel-content(ng-show="pix && pix.comments.length")
+    ul(ng-class="{'small-stamp': config.smallStamp}")
+      li(ng-repeat="comment in pix.comments" ng-bind-html="comment")
+  .panel-footer.PV-form(ng-show="pix && pix.more")
+    button.btn.btn-primary.btn-block(ng-click="get()"
+                                     ng-disabled="wait") 続きを読む

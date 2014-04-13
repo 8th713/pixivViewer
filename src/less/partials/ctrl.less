@@ -1,0 +1,131 @@
+.PV-ctrl {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: @barWidth;
+  height: 100vh;
+
+  > .PV-panel {
+    position: absolute;
+    top: 0;
+    left: @barWidth;
+
+    &.ng-enter,
+    &.ng-leave {
+      transition: .5s;
+    }
+
+    &.ng-enter,
+    &.ng-leave.ng-leave-active {
+      opacity: 0;
+      -webkit-transform: translate(-100%);
+              transform: translate(-100%);
+    }
+
+    &.ng-leave,
+    &.ng-enter.ng-enter-active {
+      opacity: 1;
+      -webkit-transform: translate(0);
+              transform: translate(0);
+    }
+
+    > .container {
+      @mw: e('100vw - @{barWidth}');
+
+      min-width: 200px;
+      max-width: calc(@mw);
+      max-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 1px 1px 2px #666;
+    }
+
+    .panel-header,
+    .panel-footer {
+      flex: 0 0 auto;
+      padding: 10px 15px;
+
+      color: #333;
+      background-color: #f5f5f5;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .panel-header { border-bottom: 1px solid #ddd; }
+    .panel-footer { border-top:    1px solid #ddd; }
+
+    .panel-content {
+      overflow: auto;
+      padding: 15px;
+
+      color: #333;
+      background-color: #fff;
+      font-size: 14px;
+
+      &:before,
+      &:after　{
+        content: '';
+        display: table;
+      }
+
+      > p,
+      > ol {
+        margin-bottom: 8px;
+      }
+
+      > h4 {
+        margin-bottom: 8px;
+        font-size: 1em;
+        font-weight: bold;
+      }
+
+      > dl {
+        margin-bottom: 8px;
+
+        > dd {
+          margin-left: 16px;
+        }
+      }
+
+      > table {
+        width: 100%;
+        margin-bottom: 8px;
+
+        td {
+          padding: 5px;
+          border-top: 1px solid #ddd;
+        }
+
+        tr:first-child {
+          td {
+            border-top: none;
+          }
+        }
+      }
+
+      kbd {
+        display: inline-block;
+        margin-right: 6px;
+        padding: 4px 1em;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: inset 0 -2px 0 0   #999,
+                    inset 0  0   0 1px #999;
+        font-size: 12px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      > *:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    @import "panel";
+  }
+
+  @import "toolbar";
+}
