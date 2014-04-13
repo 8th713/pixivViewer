@@ -1,0 +1,9 @@
+Thumbs.db
+.DS_Store
+
+app
+node_modules
+components
+memo.md
+*.sublime-project
+*.pem
