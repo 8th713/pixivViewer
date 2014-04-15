@@ -6,4 +6,5 @@ node_modules
 components
 memo.md
 *.sublime-project
+*.sublime-workspace
 *.pem
