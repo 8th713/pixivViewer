@@ -1,0 +1,48 @@
+.PV .PV-main {
+  left: 0;
+}
+
+.PV .PV-main > .PV-view.align {
+  text-align: left;
+}
+
+.PV .PV-ctrl {
+  left: auto;
+  right: 0;
+}
+
+.PV .PV-ctrl > .PV-panel {
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 40px;
+}
+
+.PV .PV-ctrl > .PV-panel.ng-enter,
+.PV .PV-ctrl > .PV-panel.ng-leave.ng-leave-active {
+  -webkit-transform: translate(100%);
+  transform: translate(100%);
+}
+
+.PV .PV-ctrl > .PV-panel > .container {
+  box-shadow: -1px 1px 2px #666;
+}
+
+.PV .PV-ctrl > .PV-toolbar {
+  box-shadow: -1px 0 2px #666;
+}
+
+.PV .PV-ctrl > .PV-toolbar .sub-nav {
+  left: auto;
+  right: 100%;
+}
+
+.PV .PV-ctrl > .PV-toolbar .sub-nav.ng-hide {
+  -webkit-transform: translate(100%);
+  transform: translate(100%);
+}
+
+.PV-notes {
+  left: 0;
+  right: auto;
+}
