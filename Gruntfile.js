@@ -1,3 +1,4 @@
+/* jshint node: true */
 module.exports = function(grunt) {
   'use strict';
 
@@ -72,6 +73,9 @@ module.exports = function(grunt) {
         }
       },
       viewer: {
+        options: {
+          process: true
+        },
         files: {
           'app/js/viewer.js': ['src/js/viewer/**/*.js']
         }
