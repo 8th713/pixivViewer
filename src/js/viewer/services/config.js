@@ -15,7 +15,8 @@ function configFactory($rootScope,  $q) {
     scrollbar: false,
     width: 300,
     margin: 20,
-    smallStamp: false
+    smallStamp: false,
+    version: '<%= pkg.version %>'
   };
   var attrs = {};
 
@@ -36,6 +37,7 @@ function configFactory($rootScope,  $q) {
     var dfd = $q.defer();
 
     storage.clear(function() {
+      console.log('Clean up the settings');
       _.each(configDef, defineProperty, attrs);
       $rootScope.$apply(function() {
         dfd.resolve();
@@ -70,8 +72,6 @@ function configFactory($rootScope,  $q) {
       tmp  = {};
     });
   }, 300);
-
-  load();
 
   return {
     attrs: attrs,

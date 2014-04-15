@@ -19,7 +19,8 @@ angular.module('App', [
   'App.directives.img',
   'App.directives.fit',
   'App.directives.bkm'
-]).run(['keys', 'page', function initialize(keys, page) {
+]).run([           '$rootScope','keys','config','page',
+function initialize($rootScope,  keys,  config,  page) {
   // var orgSend = XMLHttpRequest.prototype.send;
 
   // XMLHttpRequest.prototype.send = function send() {
@@ -32,6 +33,34 @@ angular.module('App', [
   //   }, delay * 1000);
   //   console.info('delay time: %ss', delay);
   // };
+
+  if (Element.prototype.matches === void 0) {
+    Element.prototype.matches = Element.prototype.webkitMatchesSelector;
+  }
+
+  config.load().then(function() {
+    $rootScope.$watch(configScrollWatch, configScrollWatchAction);
+
+    var currentVer = '<%= pkg.version %>';
+
+    if (config.attrs.version !== currentVer) {
+      throw 'old';
+    }
+  }).catch(config.clear);
+
+  function configScrollWatch() {
+    return config.attrs.scrollbar;
+  }
+
+  function configScrollWatchAction(value) {
+    var classList = document.documentElement.classList;
+
+    if (value) {
+      classList.remove('no-scrollbar');
+    } else {
+      classList.add('no-scrollbar');
+    }
+  }
 
   var Key = keys.Key;
 
@@ -59,13 +88,13 @@ angular.module('App', [
   link = doc.createElement('link');
   link.rel = 'stylesheet';
   link.href = chrome.extension.getURL('styles.css');
-  doc.head.appendChild(link);
+  doc.head.insertAdjacentElement('afterbegin', link);
 
   var script;
 
   script = doc.createElement('script');
   script.src = chrome.runtime.getURL('js/message.js');
-  doc.head.appendChild(script);
+  doc.head.insertAdjacentElement('afterbegin', script);
 
   var xhr = new XMLHttpRequest();
 
