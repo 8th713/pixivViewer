@@ -2,11 +2,10 @@ angular.module('App.directives.fit', [])
 .directive('pvFit', [function pvFitFactory() {
   return {
     controller: ['$element', 'config', function Ctrl($el, config) {
-      var parent = document.querySelector('.PV-main');
-      var el = $el[0];
-      var style = el.style;
-
       this.resize = function resize() {
+        var parent = document.querySelector('.PV-main');
+        var el = $el[0];
+        var style = el.style;
         var attrs = config.attrs;
         var margin, vw, vh, ow, oh, bw, bh, by;
 
@@ -29,13 +28,21 @@ angular.module('App.directives.fit', [])
       };
     }],
     link: function linkFn(scope, $el, attrs, ctrl) {
-      scope.$watch(attrs.pvFit, ctrl.resize);
-      scope.$watch('config.margin', ctrl.resize);
+      scope.$watch('config.fit',    change);
+      scope.$watch('config.margin', change);
 
-      $el.on('load', ctrl.resize);
+      function change(newValue, oldValue) {
+        if (newValue !== oldValue) {
+          ctrl.resize();
+        }
+      }
 
-      var resize = _.debounce(ctrl.resize);
+      var resize = _.debounce(ctrl.resize, 150);
+
       window.addEventListener('resize', resize);
+      $el.on('$destroy', function() {
+        window.removeEventListener('resize', resize);
+      });
     }
   };
 }]);

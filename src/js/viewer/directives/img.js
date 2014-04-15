@@ -1,12 +1,15 @@
 angular.module('App.directives.img', [])
 .directive('pvLoad', ['$parse', function pvLoadFactory($parse) {
   return {
+    require: 'pvFit',
+    priority: 100,
     compile: function compileFn($el, attr) {
       var fn = $parse(attr.pvLoad);
 
-      return function linkFn(scope, el) {
+      return function linkFn(scope, el, attr, ctrl) {
         el.on('load', function (evt) {
           scope.$apply(function() {
+            ctrl.resize();
             fn(scope, {$event: evt});
           });
         });
@@ -16,6 +19,7 @@ angular.module('App.directives.img', [])
 }])
 .directive('pvErr', ['$parse', function pvErrFactory($parse) {
   return {
+    priority: 100,
     compile: function compileFn($el, attr) {
       var fn = $parse(attr.pvErr);
 
