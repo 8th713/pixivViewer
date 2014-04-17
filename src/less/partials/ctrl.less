@@ -34,7 +34,8 @@
       @mw: e('100vw - @{barWidth}');
 
       min-width: 200px;
-      max-width: calc(@mw);
+      max-width: -webkit-calc(@mw);
+      max-width:         calc(@mw);
       max-height: 100vh;
       display: flex;
       flex-direction: column;
