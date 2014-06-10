@@ -2,8 +2,13 @@
   "name": "pixivviewer",
   "version": "2.0.2",
   "description": "Extension for viewing comfortably pixiv.",
-  "author": "8th713",
-  "license": "MIT",
+  "author": "8th713 <8th713@gmail.com> (https://github.com/8th713/)",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/8th713/pixivViewer/blob/master/LICENSE"
+    }
+  ],
   "readmeFilename": "README.md",
   "homepage": "https://sites.google.com/site/8th713lab/Home/chrome/pixivviewer",
   "repository": {

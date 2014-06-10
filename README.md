@@ -8,7 +8,7 @@ Extension for viewing comfortably pixiv.
 * [AngularJS](http://angularjs.org)
 * [Lo-Dash](http://lodash.com)
 * [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
-* [Fontello](http://fontello.com)
+* [IcoMoon App](http://icomoon.io/app)
 
 ## Author
 * [@8th713](https://github.com/8th713)
