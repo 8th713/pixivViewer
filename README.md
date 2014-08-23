@@ -1,4 +1,7 @@
 # pixivViewer
+
+**開発は [cockpit-for-pixiv](http://8th713.github.io/cockpit-for-pixiv/) に引き継がれました。こちらの更新は今後ありません。**
+
 Extension for viewing comfortably pixiv.
 
 ## Installation and Usage
